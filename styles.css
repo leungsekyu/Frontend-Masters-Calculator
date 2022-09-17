@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.cal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.scr-container {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 400px;
+  height: 100px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 52px;
+  color: white;
+  background-color: black;
+  padding-right: 15px;
+}
+
+.btn-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'func-clear func-clear func-delete opr-divide'
+    'num-7      num-8      num-9       opr-times'
+    'num-4      num-5      num-6       opr-minus'
+    'num-1      num-2      num-3       opr-plus'
+    'num-0      num-0      num-0       opr-equals';
+  gap: 2px;
+  padding: 0 2px 2px 2px;
+  width: 400px;
+  height: 500px;
+  background-color: black;
+}
+
+.btn-func,
+.btn-opr,
+.btn-num {
+  border: none;
+  font-size: 40px;
+}
+
+.btn-func,
+.btn-num {
+  background-color: #d8d9db;
+}
+.btn-func:hover,
+.btn-num:hover {
+  background-color: #ebebeb;
+}
+.btn-func:active,
+.btn-num:active {
+  background-color: #bbbcbe;
+}
+
+.btn-opr {
+  color: white;
+  background-color: #df974c;
+}
+.btn-opr:hover {
+  background-color: #dfb07e;
+}
+.btn-opr:active {
+  background-color: #dd8c37;
+}
+
+/* functional buttons */
+#func-clear {
+  grid-area: func-clear;
+}
+#func-delete {
+  grid-area: func-delete;
+}
+/* end functional buttons */
+
+/* operator buttons */
+#opr-plus {
+  grid-area: opr-plus;
+}
+#opr-minus {
+  grid-area: opr-minus;
+}
+#opr-times {
+  grid-area: opr-times;
+}
+#opr-divide {
+  grid-area: opr-divide;
+}
+#opr-equals {
+  grid-area: opr-equals;
+}
+/* end operator buttons */
+
+/* number button */
+#num-0 {
+  grid-area: num-0;
+}
+#num-1 {
+  grid-area: num-1;
+}
+#num-2 {
+  grid-area: num-2;
+}
+#num-3 {
+  grid-area: num-3;
+}
+#num-4 {
+  grid-area: num-4;
+}
+#num-5 {
+  grid-area: num-5;
+}
+#num-6 {
+  grid-area: num-6;
+}
+#num-7 {
+  grid-area: num-7;
+}
+#num-8 {
+  grid-area: num-8;
+}
+#num-9 {
+  grid-area: num-9;
+}
+/* end number button */

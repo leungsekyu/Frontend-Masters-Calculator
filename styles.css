@@ -13,6 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
 
 .scr-container {
@@ -30,7 +31,7 @@ body {
 
 .btn-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     'func-clear func-clear func-delete opr-divide'
     'num-7      num-8      num-9       opr-times'
@@ -47,8 +48,9 @@ body {
 .btn-func,
 .btn-opr,
 .btn-num {
-  border: none;
   font-size: 40px;
+  color: black;
+  border: none;
 }
 
 .btn-func,

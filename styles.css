@@ -76,6 +76,10 @@ body {
 .btn-opr:active {
   background-color: #dd8c37;
 }
+.btn-opr-clicked {
+  color: #df974c;
+  background-color: white;
+}
 
 /* functional buttons */
 #func-clear {

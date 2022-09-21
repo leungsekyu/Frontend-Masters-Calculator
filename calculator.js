@@ -1,97 +1,135 @@
-let scrNumStr = '0';
-let num1 = 0;
+let scrNum = '0'; // string
+let preNum = 0;
+let currNum = 0;
 let opr = '';
-let num2 = 0;
-let result = 0;
+let lastClicked = null;
 
-const screen = document.querySelector('.scr-container');
-const buttons = document.querySelector('.btn-container');
+const screen = $('.scr-container');
+const buttons = $('.btn-container');
+// console.log('screen: ', screen);
+// console.log('buttons: ', screen);
 
-buttons.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    const elemCl = event.target.className; // element class
-    const elemVal = event.target.innerText;
+buttons.click((event) => {
+  const elem = event.target;
+  if (elem.tagName === 'BUTTON') {
+    const elemCl = elem.className; // element class
+    const elemVal = elem.innerText; // element value
+
+    // revert '+' '−' '×' '÷' background color
+    if (lastClicked !== null && lastClicked.className.includes('btn-opr')) {
+      $(lastClicked).removeClass('btn-opr-clicked');
+    }
 
     if (elemCl.includes('btn-func')) {
       solveFunc(elemVal);
     } else if (elemCl.includes('btn-opr')) {
+      // set '+' '−' '×' '÷' background color
+      if (elemVal !== '=') {
+        $(elem).addClass('btn-opr-clicked');
+      }
       solveOpr(elemVal);
     } else if (elemCl.includes('btn-num')) {
       solveNum(elemVal);
     }
 
     rerender();
+
+    // log last clicked button
+    lastClicked = elem;
+
+    // console.log('preNum: ', preNum);
+    // console.log('opr: ', opr);
+    // console.log('currNum: ', currNum);
+    // console.log('preNum: ', preNum);
+    // console.log('lastClicked: ', lastClicked);
+    // console.log('--------------------------');
   }
 });
 
-function solveFunc(funcStr) {
-  switch (funcStr) {
+function solveFunc(currFunc) {
+  switch (currFunc) {
     case 'C':
-      scrNumStr = '0';
+      scrNum = '0';
       opr = '';
       break;
     case '←':
-      if (scrNumStr.length === 1) {
-        scrNumStr = '0';
+      if (scrNum.length === 1) {
+        scrNum = '0';
       } else {
-        scrNumStr = scrNumStr.substring(0, scrNumStr.length - 1);
+        scrNum = scrNum.substring(0, scrNum.length - 1);
       }
       break;
   }
 }
 
-function solveOpr(oprStr) {
-  if (opr === '') {
-    num1 = Number.parseInt(scrNumStr);
-  }
-  if (oprStr !== '=') {
-    opr = oprStr;
-    // initialize
-    scrNumStr = '0';
-  } else if (oprStr === '=') {
-    solveEquals(oprStr);
+function solveOpr(currOpr) {
+  switch (currOpr) {
+    case '+':
+    case '−':
+    case '×':
+    case '÷':
+      if (opr === '') {
+        initOpr(currOpr);
+      } else {
+        if (!lastClicked.className.includes('btn-opr')) {
+          flushOpr(currOpr);
+        } else {
+          opr = currOpr;
+        }
+      }
+      break;
+    case '=':
+      if (opr !== '' && !lastClicked.className.includes('btn-opr')) {
+        flushOpr(currOpr);
+        init();
+      } else {
+        init();
+      }
+      break;
   }
 }
 
-function solveEquals(equals) {
-  num2 = Number.parseInt(scrNumStr);
+function initOpr(currOpr) {
+  preNum = Number.parseInt(scrNum);
+  opr = currOpr;
+}
 
-  console.log('num1: ', num1);
-  console.log('num2: ', num2);
+function flushOpr(currOpr) {
+  currNum = Number.parseInt(scrNum);
 
   switch (opr) {
     case '+':
-      result = num1 + num2;
+      preNum += currNum;
       break;
     case '−':
-      result = num1 - num2;
+      preNum -= currNum;
       break;
     case '×':
-      result = num1 * num2;
+      preNum *= currNum;
       break;
     case '÷':
-      result = num1 / num2;
-      break;
-    default:
-      result = Number.parseInt(scrNumStr);
+      preNum /= currNum;
       break;
   }
-  scrNumStr = result.toString();
 
-  opr = equals;
+  scrNum = preNum.toString();
+  opr = currOpr;
 }
 
-function solveNum(numStr) {
-  if (scrNumStr === '0' || opr === '=') {
-    scrNumStr = numStr;
-    if (opr === '=') {
-      opr = '';
-    }
+function solveNum(currChar) {
+  if (lastClicked !== null && lastClicked.className.includes('btn-num')) {
+    scrNum += currChar;
   } else {
-    scrNumStr += numStr;
+    scrNum = currChar;
   }
 }
 
 function rerender() {
-  screen.innerText = scrNumStr;
+  screen.text(scrNum); // jQuery set innerText function
+}
+
+function init() {
+  preNum = 0;
+  currNum = 0;
+  opr = '';
 }

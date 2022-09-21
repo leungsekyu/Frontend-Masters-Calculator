@@ -41,7 +41,7 @@ function solveFunc(funcStr) {
 }
 
 function solveOpr(oprStr) {
-  if (opr === '') {
+  if (opr === '' || opr === '=') {
     num1 = Number.parseInt(scrNumStr);
   }
   if (oprStr !== '=') {
@@ -55,9 +55,6 @@ function solveOpr(oprStr) {
 
 function solveEquals(equals) {
   num2 = Number.parseInt(scrNumStr);
-
-  console.log('num1: ', num1);
-  console.log('num2: ', num2);
 
   switch (opr) {
     case '+':

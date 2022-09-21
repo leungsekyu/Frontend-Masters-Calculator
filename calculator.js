@@ -7,11 +7,9 @@ let result = 0;
 const screen = document.querySelector('.scr-container');
 const buttons = document.querySelector('.btn-container');
 
-screen.innerText = scrNumStr;
-
 buttons.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
-    const elemCl = event.target.className; // elemCl: element class
+    const elemCl = event.target.className; // element class
     const elemVal = event.target.innerText;
 
     if (elemCl.includes('btn-func')) {
@@ -22,47 +20,48 @@ buttons.addEventListener('click', (event) => {
       solveNum(elemVal);
     }
 
-    console.log(scrNumStr);
+    rerender();
   }
 });
 
 function solveFunc(funcStr) {
   switch (funcStr) {
     case 'C':
-      // initialize
       scrNumStr = '0';
-      screen.innerText = scrNumStr;
       opr = '';
       break;
     case '←':
-      if (scrNumStr.length > 1) {
-        scrNumStr = scrNumStr.substring(0, scrNumStr.length - 1);
-      } else {
+      if (scrNumStr.length === 1) {
         scrNumStr = '0';
+      } else {
+        scrNumStr = scrNumStr.substring(0, scrNumStr.length - 1);
       }
-      screen.innerText = scrNumStr;
       break;
   }
 }
 
 function solveOpr(oprStr) {
-  if (oprStr !== '=') {
+  if (opr === '') {
     num1 = Number.parseInt(scrNumStr);
+  }
+  if (oprStr !== '=') {
     opr = oprStr;
     // initialize
     scrNumStr = '0';
-    screen.innerText = scrNumStr;
   } else if (oprStr === '=') {
-    solveEquals();
+    solveEquals(oprStr);
   }
 }
 
-function solveEquals() {
+function solveEquals(equals) {
   num2 = Number.parseInt(scrNumStr);
+
+  console.log('num1: ', num1);
+  console.log('num2: ', num2);
+
   switch (opr) {
     case '+':
       result = num1 + num2;
-      console.log(result);
       break;
     case '−':
       result = num1 - num2;
@@ -77,17 +76,22 @@ function solveEquals() {
       result = Number.parseInt(scrNumStr);
       break;
   }
-  screen.innerText = result;
-  // initialize
-  scrNumStr = '0';
-  opr = '';
+  scrNumStr = result.toString();
+
+  opr = equals;
 }
 
 function solveNum(numStr) {
-  if (scrNumStr === '0') {
+  if (scrNumStr === '0' || opr === '=') {
     scrNumStr = numStr;
+    if (opr === '=') {
+      opr = '';
+    }
   } else {
     scrNumStr += numStr;
   }
+}
+
+function rerender() {
   screen.innerText = scrNumStr;
 }

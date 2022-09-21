@@ -62,7 +62,6 @@ function solveFunc(currFunc) {
   }
 }
 
-<<<<<<< HEAD
 function solveOpr(currOpr) {
   switch (currOpr) {
     case '+':
@@ -87,18 +86,6 @@ function solveOpr(currOpr) {
         init();
       }
       break;
-=======
-function solveOpr(oprStr) {
-  if (opr === '' || opr === '=') {
-    num1 = Number.parseInt(scrNumStr);
-  }
-  if (oprStr !== '=') {
-    opr = oprStr;
-    // initialize
-    scrNumStr = '0';
-  } else if (oprStr === '=') {
-    solveEquals(oprStr);
->>>>>>> dc5b939e37f5eafea364e89d3be11a263bf56c56
   }
 }
 
@@ -107,12 +94,9 @@ function initOpr(currOpr) {
   opr = currOpr;
 }
 
-<<<<<<< HEAD
 function flushOpr(currOpr) {
   currNum = Number.parseInt(scrNum);
 
-=======
->>>>>>> dc5b939e37f5eafea364e89d3be11a263bf56c56
   switch (opr) {
     case '+':
       preNum += currNum;

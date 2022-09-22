@@ -117,7 +117,12 @@ function flushOpr(currOpr) {
 }
 
 function solveNum(currChar) {
-  if (lastClicked !== null && lastClicked.className.includes('btn-num')) {
+  if (scrNum === '0') {
+    scrNum = currChar;
+  } else if (
+    lastClicked !== null &&
+    lastClicked.className.includes('btn-num')
+  ) {
     scrNum += currChar;
   } else {
     scrNum = currChar;

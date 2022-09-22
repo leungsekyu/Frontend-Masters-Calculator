@@ -70,10 +70,12 @@
       case '×':
       case '÷':
         if (opr === '') {
-          initOpr(currOpr);
+          preNum = parseInt(scrNum);
+          opr = currOpr;
         } else {
           if (!lastClicked.className.includes('btn-opr')) {
-            flushOpr(currOpr);
+            flushOpr();
+            opr = currOpr;
           } else {
             opr = currOpr;
           }
@@ -81,7 +83,7 @@
         break;
       case '=':
         if (opr !== '' && !lastClicked.className.includes('btn-opr')) {
-          flushOpr(currOpr);
+          flushOpr();
           init();
         } else {
           init();
@@ -90,12 +92,7 @@
     }
   }
 
-  function initOpr(currOpr) {
-    preNum = parseInt(scrNum);
-    opr = currOpr;
-  }
-
-  function flushOpr(currOpr) {
+  function flushOpr() {
     currNum = parseInt(scrNum);
 
     switch (opr) {
@@ -114,7 +111,6 @@
     }
 
     scrNum = preNum.toString();
-    opr = currOpr;
   }
 
   function solveNum(currChar) {

@@ -91,12 +91,12 @@
   }
 
   function initOpr(currOpr) {
-    preNum = Number.parseInt(scrNum);
+    preNum = parseInt(scrNum);
     opr = currOpr;
   }
 
   function flushOpr(currOpr) {
-    currNum = Number.parseInt(scrNum);
+    currNum = parseInt(scrNum);
 
     switch (opr) {
       case '+':

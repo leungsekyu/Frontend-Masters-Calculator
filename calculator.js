@@ -35,15 +35,15 @@
 
       rerender();
 
-      // log last clicked button
-      lastClicked = elem;
-
       //   console.log('preNum: ', preNum);
       //   console.log('opr: ', opr);
       //   console.log('currNum: ', currNum);
       //   console.log('preNum: ', preNum);
       //   console.log('lastClicked: ', lastClicked);
       //   console.log('--------------------------');
+
+      // log last clicked button
+      lastClicked = elem;
     }
   });
 
@@ -119,10 +119,7 @@
   function solveNum(currChar) {
     if (scrNum === '0') {
       scrNum = currChar;
-    } else if (
-      lastClicked !== null &&
-      lastClicked.className.includes('btn-num')
-    ) {
+    } else if (lastClicked.className.includes('btn-num')) {
       scrNum += currChar;
     } else {
       scrNum = currChar;

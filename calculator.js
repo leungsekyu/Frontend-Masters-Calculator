@@ -38,26 +38,29 @@
       // log last clicked button
       lastClicked = elem;
 
-      // console.log('preNum: ', preNum);
-      // console.log('opr: ', opr);
-      // console.log('currNum: ', currNum);
-      // console.log('preNum: ', preNum);
-      // console.log('lastClicked: ', lastClicked);
-      // console.log('--------------------------');
+      //   console.log('preNum: ', preNum);
+      //   console.log('opr: ', opr);
+      //   console.log('currNum: ', currNum);
+      //   console.log('preNum: ', preNum);
+      //   console.log('lastClicked: ', lastClicked);
+      //   console.log('--------------------------');
     }
   });
 
   function solveFunc(currFunc) {
     switch (currFunc) {
       case 'C':
+        init();
         scrNum = '0';
-        opr = '';
         break;
       case '←':
         if (scrNum.length === 1) {
           scrNum = '0';
         } else {
           scrNum = scrNum.substring(0, scrNum.length - 1);
+        }
+        if (lastClicked.className.includes('btn-opr')) {
+          opr = '';
         }
         break;
     }
